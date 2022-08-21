@@ -1,0 +1,86 @@
+{% extends 'seed/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="box-element" id="form-wrapper">
+                    <form action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+
+                        <hr>
+                        <p><h4><strong>Авторизація</strong></h4></p>
+                        <hr>
+
+                        <div class="input-group mb-3">
+                            <!--							<div class="input-group-append">-->
+                            <!--								<span class="input-group-text"><i class="fas fa-user"></i></span>-->
+                            <!--							</div>-->
+                            <label class="form-field">Ваш емейл: </label>
+
+
+                            <input type="text" name="email" placeholder="Емейл..." class="form-field">
+                        </div>
+                        <br>
+
+                        <div class="input-group mb-2">
+                            <label class="form-field">Пароль: </label>
+
+                            <input type="password" name="password" placeholder="Пароль..." class="form-field">
+                        </div>
+                        <br>
+                        {% for message in messages%}
+                        <p id="messages">{{message}}</p>
+                        {% endfor %}
+                        <hr>
+
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <input class="btn btn-success btn-block" type="submit" value="Вхід">
+                        </div>
+                    </form>
+                    <!--                    <form action="{% url 'register' %}" method="POST">-->
+                    <!--                        {% csrf_token %}-->
+
+                    <!--                        <hr>-->
+                    <!--                        <p><h4><strong>Авторизація</strong></h4></p>-->
+
+                    <!--                        <hr>-->
+
+                    <!--                        <div class="form-error">{{ form.non_field_errors }}</div>-->
+
+
+                    <!--                        <p><label class="form-field" for="{{ form.username.id_for_label }}">{{form.username.label}}: </label>{{ form.username }}</p>-->
+                    <!--                        <div class="form-error">{{ form.username.errors }}</div>-->
+
+                    <!--                        <p><label class="form-field" for="{{ form.password1.id_for_label }}">{{form.password1.label}}: </label>{{ form.password1 }}</p>-->
+                    <!--                        <div class="form-error">{{ form.password1.errors }}</div>-->
+
+
+                    <!--                        <hr>-->
+
+                    <!--                        <input id="form-button" class="btn btn-success btn-block" type="submit"-->
+                    <!--                               value="Вхід">-->
+
+
+                    <!--                    </form>-->
+                    <hr>
+
+
+                    <div class="d-flex justify-content-center links">
+                        Ви ще не зареєстровані на сайті? <a href="{% url 'register' %}" class="ml-2">Реєстрація</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

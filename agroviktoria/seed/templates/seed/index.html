@@ -1,0 +1,194 @@
+{% extends 'seed/main.html' %}
+{% load static %}
+{% block content %}
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            {% for message in messages%}
+            <p id="messages"><h3>{{message}}</h3></p>
+                {% endfor %}
+
+            <br>
+            <!-- shop -->
+            <div class="col-md-4 col-xs-6">
+<!--                {% for message in messages%}-->
+<!--                <p id="messages">{{message}}</p>-->
+<!--                {% endfor %}-->
+                <div class="shop">
+                    <div class="shop-img">
+                        <img src="{% static 'img/Vika_jarovaja1.jpg' %}" alt="">
+                    </div>
+                    <div class="shop-body">
+                        <h3>Купити насіння<br>Віка-ярова</h3>
+                        <a href="{% url 'store'%}" class="cta-btn">показати <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /shop -->
+
+            <!-- shop -->
+            <div class="col-md-4 col-xs-6">
+                <div class="shop">
+                    <div class="shop-img">
+                        <img src="{% static 'img/lucerna1.jpg' %}" alt="">
+                    </div>
+                    <div class="shop-body">
+                        <h3>Купити насіння<br>Люцерни</h3>
+                        <a href="{% url 'store'%}" class="cta-btn">показати <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /shop -->
+
+            <!-- shop -->
+            <div class="col-md-4 col-xs-6">
+                <div class="shop">
+                    <div class="shop-img">
+                        <img src="{% static 'img/lupin1.png' %}" alt="">
+                    </div>
+                    <div class="shop-body">
+                        <h3>Купити насіння<br>Люпина</h3>
+                        <a href="{% url 'store'%}" class="cta-btn">показати <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /shop -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <!-- section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h3 class="title">Топ продаж</h3>
+                    <!--div class="section-nav">
+                        <ul class="section-tab-nav tab-nav">
+                            <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
+                            <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
+                            <li><a data-toggle="tab" href="#tab1">Cameras</a></li>
+                            <li><a data-toggle="tab" href="#tab1">Accessories</a></li>
+                        </ul>
+                    </div-->
+                </div>
+            </div>
+            <!-- /section title -->
+
+            <!-- Products tab & slick -->
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="products-tabs">
+                        <!-- tab -->
+                        <div id="tab1" class="tab-pane active">
+                            <div class="products-slick" data-nav="#slick-nav-1">
+                                <!-- product -->
+                                {% for product in products%}
+                                {% if product.top_sale %}
+                                <div class="product">
+                                    <div class="product-img">
+                                        <img src="{{product.imageURL}}" alt="">
+                                        <div class="product-label">
+                                            <!--span class="sale">-10%</span-->
+                                            <span class="new">НОВИЙ УРОЖАЙ</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category">{{product.cat}}</p>
+                                        <h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{product.name_prod}}</a></h3>
+                                        <h4 class="product-price">{{product.price}} грн/кг
+<!--                                            <del class="product-old-price">45 грн/кг</del>-->
+                                        </h4>
+                                        <div class="product-rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="product-btns">
+                                            <h3 class="product-category"><a href="{{ product.get_absolute_url }}">Переглянути</a></h3>
+                                        </div>
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <button data-product={{product.pk}} data-action="add" class="add-to-cart-btn update-cart"><i  class="fa fa-shopping-cart"></i> Додати в кошик </button>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+
+
+                            </div>
+                            <div id="slick-nav-1" class="products-slick-nav"></div>
+                        </div>
+                        <!-- /tab -->
+                    </div>
+                </div>
+            </div>
+            <!-- Products tab & slick -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- HOT DEAL SECTION -->
+<div id="hot-deal" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hot-deal">
+                    <ul class="hot-deal-countdown">
+                        <li>
+                            <div>
+                                <h3>02</h3>
+                                <span>Дні</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <h3>10</h3>
+                                <span>Годин</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <h3>34</h3>
+                                <span>Хвилини</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <h3>50</h3>
+                                <span>Секунд</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <h2 class="text-uppercase">Гарячі пропозиції тиждня</h2>
+                    <p>Нове насіння зі скидкою</p>
+                    <a class="primary-btn cta-btn" href="{% url 'store'%}">Купити зараз</a>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /HOT DEAL SECTION -->
+
+{% endblock content %}

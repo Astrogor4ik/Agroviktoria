@@ -1,0 +1,120 @@
+{% extends 'seed/main.html' %}
+{% load static %}
+{% block content %}
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- ASIDE -->
+            <div id="aside" class="col-md-3">
+                <!-- aside Widget -->
+                <div class="aside">
+                    {% if cat_selected == 0 %}
+                    <h3 class="aside-title">Види насіння</h3>
+                    <!--li class="selected">Види насіння</li-->
+                    {% else %}
+                    <h3 class="aside-title">Види насіння</h3>
+                    {% endif %}
+
+                    {% for c in categories %}
+                    {% if c.pk == cat_selected %}
+                    <div class="selected">{{c.name_cat}}</div>
+                    {% else %}
+                    <div><a href="{{ c.get_absolute_url }}">{{c.name_cat}}</a></div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+                <!-- /aside Widget -->
+
+
+                <!-- aside Widget -->
+                <div class="aside">
+                    <h3 class="aside-title">Топ продаж</h3>
+                    {% for product in products_2 %}
+                    {% if product.top_sale and product.pk < 7 %}
+                    <div class="product-widget">
+
+                        <div class="product-img">
+                            <img src="{{product.imageURL}}" alt="">
+                        </div>
+
+                        <div class="product-body">
+                            <p class="product-category">{{product.cat}}</p>
+                            <h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{product.name_prod}}</a></h3>
+                            <h4 class="product-price">{{product.price}} грн/кг
+<!--                                <del class="product-old-price">40 грн/кг</del>-->
+                            </h4>
+                        </div>
+
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <!-- /aside Widget -->
+            </div>
+            <!-- /ASIDE -->
+
+            <!-- STORE -->
+            <div id="store" class="col-md-9">
+
+                <div class="row">
+
+                    {% for product in products %}
+                    {%if product.is_published and product in page_obj%}
+                    <div class="col-md-4 col-xs-6">
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="{{product.imageURL}}" alt="">
+                                <!--div class="product-label">
+                                    <span class="sale">-30%</span>
+                                    <span class="new">NEW</span>
+                                </div-->
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">{{product.cat}}</p>
+                                <h2 class="product-name"><a
+                                        href="{{ product.get_absolute_url }}">{{product.name_prod}}</a></h2>
+                                <h4 class="product-price">{{product.price}} грн/кг
+                                    <!--div class="product-old-price"></div-->
+                                </h4>
+                                <div class="product-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product-btns">
+                                    <h3 class="product-category"><a
+                                            href="{{ product.get_absolute_url }}">Переглянути</a></h3>
+                                </div>
+                            </div>
+                            <div class="add-to-cart">
+                                <button data-product={{product.pk}} data-action="add"
+                                        class="add-to-cart-btn update-cart"><i class="fa fa-shopping-cart"></i> Додати в
+                                    кошик
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /product -->
+                    {%endif%}
+                    {%endfor%}
+                    <!-- /store products -->
+
+
+                </div>
+                <!-- /STORE -->
+                <!-- store bottom filter -->
+
+                <!-- /store bottom filter -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+</div>    <!-- /SECTION -->
+{% endblock content %}
