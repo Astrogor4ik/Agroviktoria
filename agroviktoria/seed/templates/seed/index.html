@@ -98,13 +98,13 @@
                                 {% for product in products%}
                                 {% if product.top_sale %}
                                 <div class="product">
-                                    <div class="product-img">
-                                        <img src="{{product.imageURL}}" alt="">
-                                        <div class="product-label">
-                                            <!--span class="sale">-10%</span-->
-                                            <span class="new">НОВИЙ УРОЖАЙ</span>
-                                        </div>
-                                    </div>
+                                    <a href="{{ product.get_absolute_url }}" class="product-img">
+                                    <img src="{{product.imageURL}}" alt=""></a>
+<!--                                        <div class="product-label">-->
+<!--                                            &lt;!&ndash;span class="sale">-10%</span&ndash;&gt;-->
+<!--                                            <span class="new">НОВИЙ УРОЖАЙ</span>-->
+<!--                                        </div>-->
+
                                     <div class="product-body">
                                         <p class="product-category">{{product.cat}}</p>
                                         <h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{product.name_prod}}</a></h3>
