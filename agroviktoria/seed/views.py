@@ -43,21 +43,23 @@ def store(request):
     serch_query = request.GET.get('search', '')
 
     if serch_query:
-        products = Product.objects.filter(Q(name_prod__icontains=serch_query) | Q(content__icontains=serch_query)).select_related('cat')
+        products_2 = Product.objects.filter(Q(name_prod__icontains=serch_query) | Q(content__icontains=serch_query)).select_related('cat')
     else:
-        products = Product.objects.all().select_related('cat')
+        products_2 = Product.objects.all().select_related('cat')
 
-    paginator = Paginator(products, 6)
+    paginator = Paginator(products_2, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     data = cartData(request)
     cartItems = data['cartItems']
     categories = Category.objects.all()
+    products = Product.objects.all().select_related('cat')
 
 
 
     context = {'products': products,
+               'products_2': products_2,
                'categories': categories,
                'cartItems': cartItems,
                'menu': menu,
@@ -139,22 +141,24 @@ def show_post(request, prod_slug):
 
 
 def show_category(request, cat_slug):
-    products = Product.objects.filter(cat__slug_cat=cat_slug).select_related('cat')
+    products_2 = Product.objects.filter(cat__slug_cat=cat_slug).select_related('cat')
     categories = Category.objects.all()
 
     data = cartData(request)
     cartItems = data['cartItems']
 
-    if len(products) == 0:
+    if len(products_2) == 0:
         raise Http404()
 
-    paginator = Paginator(products, 6)
+    paginator = Paginator(products_2, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    products = Product.objects.all().select_related('cat')
 
 
     context = {
         'products': products,
+        'products_2': products_2,
         'categories': categories,
         'menu': menu,
         'cartItems': cartItems,
@@ -303,18 +307,23 @@ def register(request):
 
 def login_user(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        username = User.objects.get(email=email.lower()).username
+        try:
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            username = User.objects.get(email=email.lower()).username
 
-        user = authenticate(request, username=username, password=password)
-        # user_p = authenticate(request, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('index')
-        else:
+            user = authenticate(request, username=username, password=password)
+            # user_p = authenticate(request, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index')
+            else:
+                messages.info(request, "Некоректний емейл або пароль.")
+                return redirect('login')
+        except:
             messages.info(request, "Некоректний емейл або пароль.")
             return redirect('login')
+
 
     context = {'menu': menu,
                'cartItems': 0,}
