@@ -53,13 +53,11 @@ def store(request):
 
     data = cartData(request)
     cartItems = data['cartItems']
-    products_2 = Product.objects.all().select_related('cat')
     categories = Category.objects.all()
 
 
 
     context = {'products': products,
-               'products_2': products_2,
                'categories': categories,
                'cartItems': cartItems,
                'menu': menu,
