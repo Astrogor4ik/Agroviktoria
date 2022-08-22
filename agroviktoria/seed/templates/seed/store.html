@@ -109,6 +109,25 @@
                 </div>
                 <!-- /STORE -->
                 <!-- store bottom filter -->
+                <div class="store-filter clearfix">
+                    <span class="store-qty">Сторінки</span>
+                    <ul class="store-pagination">
+                    {%for p in page_obj.paginator.page_range %}
+
+
+                        {% if page_obj.number == p%}
+                            <li class="active">{{p}}</li>
+                        {% else %}
+                            <li><a href="?page={{p}}">{{p}}</a></li>
+                        <!--                        <li><a href="#">3</a></li>-->
+                        <!--                        <li><a href="#">4</a></li>-->
+                        <!--                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>-->
+                        {% endif %}
+
+
+                    {% endfor %}
+                    </ul>
+                </div>
 
                 <!-- /store bottom filter -->
             </div>

@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponse, Http404
 import json
@@ -46,6 +47,10 @@ def store(request):
     else:
         products = Product.objects.all().select_related('cat')
 
+    paginator = Paginator(products, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     data = cartData(request)
     cartItems = data['cartItems']
     products_2 = Product.objects.all().select_related('cat')
@@ -59,6 +64,7 @@ def store(request):
                'cartItems': cartItems,
                'menu': menu,
                'cat_selected': 0,
+               'page_obj': page_obj,
 
                }
     return render(request, 'seed/store.html', context)
@@ -144,6 +150,10 @@ def show_category(request, cat_slug):
     if len(products) == 0:
         raise Http404()
 
+    paginator = Paginator(products, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
 
     context = {
         'products': products,
@@ -151,7 +161,7 @@ def show_category(request, cat_slug):
         'menu': menu,
         'cartItems': cartItems,
         'cat_selected': cat_slug,
-
+        'page_obj': page_obj,
 
     }
 
