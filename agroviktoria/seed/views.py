@@ -113,10 +113,19 @@ def updateItem(request):
     if action == "add":
         orderItem.quantity = (orderItem.quantity + 1)
     elif action == "add2":
+        orderItem.quantity = (orderItem.quantity + 10)
+    elif action == "add3":
+        orderItem.quantity = (orderItem.quantity + 100)
+    elif action == "add4":
         orderItem.quantity = (orderItem.quantity + 5)
     elif action == "remove":
         orderItem.quantity = (orderItem.quantity - 1)
-
+    elif action == "remove2":
+        orderItem.quantity = (orderItem.quantity - 10)
+    elif action == "remove3":
+        orderItem.quantity = (orderItem.quantity - 100)
+    elif action == "remove4":
+        orderItem.quantity = (orderItem.quantity - 5)
     orderItem.save()
     if orderItem.quantity <= 0:
         orderItem.delete()
@@ -130,13 +139,22 @@ def show_post(request, prod_slug):
     cartItems = data['cartItems']
     categories = Category.objects.all()
     products = Product.objects.all().select_related('cat')
-
+    if request.method == 'POST':
+        try:
+            acre_val = int(request.POST.get('acre_val', False))
+            rate_val = int(request.POST.get('rate_val', False))
+            res = acre_val * rate_val
+        except:
+            return redirect('store')
+    else:
+        res = 0
     context = {'pub': pub,
                'products': products,
                'categories': categories,
                'menu': menu,
                'cartItems': cartItems,
                'cat_selected': 0,
+               "res": res
 
                }
     return render(request, 'seed/product.html', context)
