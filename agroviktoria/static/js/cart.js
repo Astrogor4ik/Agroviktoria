@@ -25,6 +25,13 @@ function addCookieItem(productId, action){
            cart[productId]['quantity'] += 1
         }
     }
+    if (action == 'add2'){
+        if (cart[productId] == undefined){
+            cart[productId] = {'quantity':5}
+        }else{
+           cart[productId]['quantity'] += 5
+        }
+    }
     if (action == 'remove'){
         cart[productId]['quantity'] -= 1
 
