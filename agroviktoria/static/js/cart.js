@@ -27,6 +27,20 @@ function addCookieItem(productId, action){
     }
     if (action == 'add2'){
         if (cart[productId] == undefined){
+            cart[productId] = {'quantity':10}
+        }else{
+           cart[productId]['quantity'] += 10
+        }
+    }
+    if (action == 'add3'){
+        if (cart[productId] == undefined){
+            cart[productId] = {'quantity':100}
+        }else{
+           cart[productId]['quantity'] += 100
+        }
+    }
+    if (action == 'add4'){
+        if (cart[productId] == undefined){
             cart[productId] = {'quantity':5}
         }else{
            cart[productId]['quantity'] += 5
@@ -34,6 +48,33 @@ function addCookieItem(productId, action){
     }
     if (action == 'remove'){
         cart[productId]['quantity'] -= 1
+
+        if(cart[productId]['quantity'] <= 0){
+            console.log('Remove Item')
+            delete cart[productId]
+
+        }
+    }
+    if (action == 'remove2'){
+        cart[productId]['quantity'] -= 10
+
+        if(cart[productId]['quantity'] <= 0){
+            console.log('Remove Item')
+            delete cart[productId]
+
+        }
+    }
+    if (action == 'remove3'){
+        cart[productId]['quantity'] -= 100
+
+        if(cart[productId]['quantity'] <= 0){
+            console.log('Remove Item')
+            delete cart[productId]
+
+        }
+    }
+    if (action == 'remove4'){
+        cart[productId]['quantity'] -= 5
 
         if(cart[productId]['quantity'] <= 0){
             console.log('Remove Item')

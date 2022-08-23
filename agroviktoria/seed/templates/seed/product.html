@@ -4,28 +4,28 @@
 
 {% block content %}
 <!-- BREADCRUMB -->
-<div id="breadcrumb" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="breadcrumb-tree">
-                    <li><a href="{% url 'index' %}">Головна</a></li>
-                    <li><a href="{% url 'store' %}">Види насіння</a></li>
-                    <li><a href="{% url 'store' %}">{{pub.cat}}</a></li>
+<!--<div id="breadcrumb" class="section">-->
+<!--    &lt;!&ndash; container &ndash;&gt;-->
+<!--    <div class="container">-->
+<!--        &lt;!&ndash; row &ndash;&gt;-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <ul class="breadcrumb-tree">-->
+<!--                    <li><a href="{% url 'index' %}">Головна</a></li>-->
+<!--                    <li><a href="{% url 'store' %}">Види насіння</a></li>-->
+<!--                    <li><a href="{% url 'store' %}">{{pub.cat}}</a></li>-->
 
 
 
 
-                    <li class="active">{{pub.name_prod}}</li>
-                </ul>
-            </div>
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
+<!--                    <li class="active">{{pub.name_prod}}</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /row &ndash;&gt;-->
+<!--    </div>-->
+<!--    &lt;!&ndash; /container &ndash;&gt;-->
+<!--</div>-->
 <!-- /BREADCRUMB -->
 
 <!-- SECTION -->
@@ -92,7 +92,7 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                        <!--a class="review-link" href="#">10 Review(s) | Add your review</a-->
+<!--                        &lt;!&ndash;a class="review-link" href="#">10 Review(s) | Add your review</a&ndash;&gt;-->
                     </div>
 
                     <div>
@@ -103,14 +103,80 @@
                         <span class="product-available">В наявності</span>
                     </div>
                     <p>{{pub.content | truncatewords:70}}</p>
+                    <form action="{{ request.path }}" method="post">
+                        {% csrf_token %}
+                        <div class="product-options">
+                            {% if res <= 0 %}
+                            {%else%}
+                            <h4>Норма висіву для вказанної прощі: {{res}} кг</h4>
+                            (рекомендована)
+                            <hr>
+                            {%endif%}
+
+                            <h4>Калькулятор норми висіву </h4>
+                            <div class="form-field">
+                                <input class="form-check-input" type="radio" name="rate_val" id="exampleRadios1"
+                                    value="{{pub.landing_rate}}" checked>
+                                <label class="form-check-label" for="exampleRadios1">
+                                    Ручний посів
+                                </label>
+                            </div>
+                            <div class="form-field">
+                                <input class="form-check-input" type="radio" name="rate_val" id="exampleRadios2"
+                                    value="{{pub.seeder_landing_rate}}">
+                                <label class="form-check-label" for="exampleRadios2">
+                                    Посів під сівалку
+                                </label>
+                            </div>
+                            <br>
+                            <div class="add-to-cart">
+                                <div class="qty-label">
+
+                                    <br>
+                                    <div class="input-number">
+                                        <input type="number" name="acre_val">
+                                        <span class="qty-up">+</span>
+                                        <span class="qty-down">-</span>
+                                    </div>
+                                    Вкажіть кількість соток засівної площі
+                                </div>
+                            </div>
+
+<!--                            <div class="form-field">-->
+<!--                                <input class="form-check-input" type="radio" name="rate_val" id="exampleRadios1"-->
+<!--                                    value="{{pub.landing_rate}}" checked>-->
+<!--                                <label class="form-check-label" for="exampleRadios1">-->
+<!--                                    Ручний посів-->
+<!--                                </label>-->
+<!--                            </div>-->
+<!--                            <div class="form-field">-->
+<!--                                <input class="form-check-input" type="radio" name="rate_val" id="exampleRadios2"-->
+<!--                                    value="{{pub.price}}">-->
+<!--                                <label class="form-check-label" for="exampleRadios2">-->
+<!--                                    Посів під сівалку-->
+<!--                                </label>-->
+<!--                            </div>-->
+
+
+
+                            <input type="submit" value="Розрахувати" >
+                            <hr>
+
+                        </div>
+                    </form>
 
 
 
                     <div class="add-to-cart">
-                    <button data-product={{pub.pk}} data-action="add" class="add-to-cart-btn update-cart"><i  class="fa fa-shopping-cart"></i> Додати 1 кг в кошик </button>
+<!--                        <button data-product={{pub.pk}} data-action="remove3" class="btn btn-success update-cart"><i></i>- 100</button>-->
+<!--                        <button data-product={{pub.pk}} data-action="remove2" class="btn btn-warning update-cart"><i></i>- 10</button>-->
+                        <button data-product={{pub.pk}} data-action="add4" class="add-to-cart-btn update-cart"><i  class="fa fa-shopping-cart"></i>Додати 5 кг в кошик</button>
+<!--                        <button data-product={{pub.pk}} data-action="add4" class="btn btn-warning update-cart"><i></i>+5кг</button>-->
+                        <button data-product={{pub.pk}} data-action="add2" class="btn btn-warning update-cart"><i></i>+ 10 кг</button>
+                        <button data-product={{pub.pk}} data-action="add3" class="btn btn-success update-cart"><i></i>+ 100 кг</button>
                     </div>
                     <div class="add-to-cart">
-                    <button data-product={{pub.pk}} data-action="add2" class="add-to-cart-btn update-cart"><i  class="fa fa-shopping-cart"></i> Додати 5 кг в кошик </button>
+
                     </div>
                     (мінімальне замовлення від 5 кг)
 
