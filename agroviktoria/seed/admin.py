@@ -18,7 +18,7 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug_cat": ('name_cat',)}
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'customer')
+    list_display = ('id', 'customer', 'date_orderd')
     list_display_links = ('id',)
     search_fields = ('customer',)
     #list_editable = ('complete',)

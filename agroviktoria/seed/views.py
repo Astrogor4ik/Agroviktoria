@@ -267,6 +267,8 @@ def processOrder(request):
         customer.save()
         #order = Order.objects.filter(customer=customer, complete=False).first()
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        order.date_orderd = datetime.datetime.now()
+        order.save()
         for item in items:
             product = Product.objects.get(pk=item['product']['pk'])
 
