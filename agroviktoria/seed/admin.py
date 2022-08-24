@@ -18,8 +18,8 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug_cat": ('name_cat',)}
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'customer', 'date_orderd')
-    list_display_links = ('id', 'customer')
+    list_display = ('id', 'customer')
+    list_display_links = ('id',)
     search_fields = ('customer',)
     #list_editable = ('complete',)
     list_filter = ('complete', 'date_orderd')
@@ -32,15 +32,15 @@ class CustomerAdmin(admin.ModelAdmin):
     #list_filter = ('time_create', 'email')
 
 class ShippingAddressAdmin(admin.ModelAdmin):
-    list_display = ('id', 'customer', 'order', 'region', 'city', 'mail', 'date_added')
-    list_display_links = ('id', 'customer', 'order')
+    list_display = ('order', 'customer', 'region', 'city', 'mail', 'date_added')
+    list_display_links = ('customer', 'order')
     search_fields = ('region', 'city')
     #list_editable = ('is_published',)
     list_filter = ('date_added', )
 
 class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ('id', 'product', 'order', 'quantity', 'date_added')
-    list_display_links = ('id', 'order')
+    list_display = ('order', 'product', 'quantity', 'date_added')
+    list_display_links = ('order',)
     search_fields = ('order',)
     #list_editable = ('complete',)
     list_filter = ('date_added', )
