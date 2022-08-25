@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>title</title>
-    {% load static %}
+    {% load static recaptcha3%}
 
     <!--<link rel="icon" href="{% static 'favicon.png' %}" type="image/png">
 	<link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="img/x-icon">
@@ -29,6 +29,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
     <script type="text/javascript">
         var user = '{{request.user}}'
 
@@ -78,6 +79,8 @@
 	console.log('Cart:', cart)
     </script>
 
+    {% recaptcha_init %}
+    {% recaptcha_ready action_name='homepage' %}
 </head>
 <body>
 <!-- HEADER -->

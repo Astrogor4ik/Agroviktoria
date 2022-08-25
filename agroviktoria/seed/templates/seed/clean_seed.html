@@ -1,5 +1,7 @@
 {% extends 'seed/main.html' %}
-{% load static %}
+{% load static recaptcha3 %}
+{% recaptcha_init %}
+{% recaptcha_ready action_name='homepage' %}
 {% block content %}
 
 
@@ -56,11 +58,19 @@
                             <hr>
 
                             <div class="form-error">{{ form.non_field_errors }}</div>
+                            <p><label class="form-field" for="{{ form.name.id_for_label }}">{{form.name.label}}: </label>{{ form.name }}</p>
+                            <div class="form-error">{{ form.name.errors }}</div>
+                            <p><label class="form-field" for="{{ form.phone.id_for_label }}">{{form.phone.label}}: </label>{{ form.phone }}</p>
+                            <div class="form-error">{{ form.phone.errors }}</div>
+                            <p>{{ form.recaptcha }}</p>
+                            <div class="form-error">{{ form.recaptcha.errors }}</div>
 
-                            {% for f in form %}
-                            <p><label class="form-field" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
-                            <div class="form-error">{{ f.errors }}</div>
-                            {% endfor %}
+
+
+<!--                            {% for f in form %}-->
+<!--                            <p><label class="form-field" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>-->
+<!--                            <div class="form-error">{{ f.errors }}</div>-->
+<!--                            {% endfor %}-->
                             <hr>
 
                             <input id="form-button" class="btn btn-success btn-block" type="submit" value="Залишити заявку">

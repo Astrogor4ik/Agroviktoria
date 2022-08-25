@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'captcha',
     'debug_toolbar',
+    'snowpenguin.django.recaptcha3',
 
 ]
 
@@ -141,12 +142,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+# CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 #CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'
 
-RECAPTCHA_PRIVATE_KEY = '6LdZE2YhAAAAADM2CkEDeMooNWmw4Q2XGofmezoW'
-RECAPTCHA_PUBLIC_KEY = '6LdZE2YhAAAAAHLWKRQEYbda1YEWTUNlG_hJrjjo'
-#RECAPTCHA_DEFAULT_ACTION = 'generic'
+RECAPTCHA_PUBLIC_KEY = '6LfGPqohAAAAAFTYTuW86xg_cMCa1EzGTSF9E1SN'
+RECAPTCHA_PRIVATE_KEY = '6LfGPqohAAAAAOSLYfl3l9SgltDLT2xYrItwvauf'
+
+RECAPTCHA_DEFAULT_ACTION = 'generic'
 RECAPTCHA_SCORE_THRESHOLD = 0.5
 #RECAPTCHA_LANGUAGE = 'en'
 

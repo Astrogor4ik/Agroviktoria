@@ -1,5 +1,7 @@
 {% extends 'seed/main.html' %}
-{% load static %}
+{% load static recaptcha3 %}
+{% recaptcha_init %}
+{% recaptcha_ready action_name='homepage' %}
 {% block content %}
 
 <div class="section">
@@ -28,8 +30,8 @@
                         <div class="form-error">{{ form.password1.errors }}</div>
                         <p><label class="form-field" for="{{ form.password2.id_for_label }}">{{form.password2.label}}: </label>{{ form.password2 }}</p>
                         <div class="form-error">{{ form.password2.errors }}</div>
-                        <p><label class="form-field" for="{{ form.captcha.id_for_label }}">{{form.captcha.label}}: </label>{{ form.captcha }}</p>
-                        <div class="form-error">{{ form.captcha.errors }}</div>
+                        <p>{{ form.recaptcha }}</p>
+                        <div class="form-error">{{ form.recaptcha.errors }}</div>
 
 
 
