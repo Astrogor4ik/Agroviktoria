@@ -6,7 +6,8 @@ import datetime
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-
+import requests
+from django.views.generic import ListView
 
 from .forms import CreateUserForm
 from .models import *
@@ -21,16 +22,25 @@ menu = [{'title': "Головна сторінка", 'url_name': 'index'},
         {'title': "Контакти", 'url_name': 'contact'}
 ]
 
-def index(request):
-    data = cartData(request)
-    cartItems = data['cartItems']
-    products = Product.objects.all().select_related('cat')
 
-    context = {'products': products,
-               'cartItems': cartItems,
-               'menu': menu
-               }
-    return render(request, 'seed/index.html', context)
+class AgroHome(ListView):
+    model = Product
+    template_name = 'seed/index.html'
+    context_object_name = 'products'
+    #extra_context = {'title': 'Головна сторінка'}
+
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        contex = super().get_context_data(**kwargs)
+        data = cartData(self.request)
+        contex['cartItems'] = data['cartItems']
+        contex['menu'] = menu
+        return contex
+
+
+    def get_queryset(self):
+        return Product.objects.filter(is_published = True)
+
 
 
 def main(request):
