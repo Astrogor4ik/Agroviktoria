@@ -48,36 +48,31 @@ def main(request):
     context = {}
     return render(request, 'seed/main.html', context)
 
-
-def store(request):
-    serch_query = request.GET.get('search', '')
-
-    if serch_query:
-        products_2 = Product.objects.filter(Q(name_prod__icontains=serch_query) | Q(content__icontains=serch_query)).select_related('cat')
-    else:
-        products_2 = Product.objects.all().select_related('cat')
-
-    paginator = Paginator(products_2, 6)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    data = cartData(request)
-    cartItems = data['cartItems']
-    categories = Category.objects.all()
+class Store(ListView):
+    paginate_by = 6
+    model = Product
+    template_name = 'seed/store.html'
+    context_object_name = 'products'
     products = Product.objects.all().select_related('cat')
+    categories = Category.objects.all()
+
+    def get_queryset(self):
+        serch_query = self.request.GET.get('search', '')
+        products_2 = Product.objects.filter(Q(name_prod__icontains=serch_query) | Q(content__icontains=serch_query)).select_related('cat')
+        return products_2
 
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        contex = super().get_context_data(**kwargs)
+        data = cartData(self.request)
+        contex['cartItems'] = data['cartItems']
+        contex['menu'] = menu
+        contex['products_2'] = self.get_queryset
+        contex['cat_selected'] = 0
+        contex['categories'] = self.categories
+        contex['products'] = self.products
 
-    context = {'products': products,
-               'products_2': products_2,
-               'categories': categories,
-               'cartItems': cartItems,
-               'menu': menu,
-               'cat_selected': 0,
-               'page_obj': page_obj,
-
-               }
-    return render(request, 'seed/store.html', context)
+        return contex
 
 
 def cart(request):
