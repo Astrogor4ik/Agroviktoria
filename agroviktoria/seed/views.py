@@ -7,11 +7,13 @@ from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 import requests
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 
-from .forms import CreateUserForm
+from .forms import CreateUserForm, AddApplicationCustomer
 from .models import *
-from .utils import cookieCart, cartData, guestOrder, AddApplicationUtils
+from .utils import cookieCart, cartData, guestOrder #AddApplicationUtils
+from django.contrib.messages.views import SuccessMessageMixin
 
 menu = [{'title': "Головна сторінка", 'url_name': 'index'},
         {'title': "Купити насіння", 'url_name': 'store'},
@@ -194,21 +196,21 @@ def show_category(request, cat_slug):
 
     return render(request, 'seed/store.html', context=context)
 
+class CleanSeed(SuccessMessageMixin, CreateView):
+    form_class = AddApplicationCustomer
+    template_name = 'seed/clean_seed.html'
+    success_url = reverse_lazy('index')
+    success_message = "Заявка успішно створена, очікуйте на дзвінок від менеджера найближчим часом."
 
-def clean_seed(request):
-    data = cartData(request)
-    cartItems = data['cartItems']
-    try:
-        form_util = AddApplicationUtils(request)
-        form = form_util['form']
-    except:
-        return redirect('index')
 
-    context = {'menu': menu,
-               'cartItems': cartItems,
-               'form': form
-               }
-    return render(request, 'seed/clean_seed.html', context)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        contex = super().get_context_data(**kwargs)
+        data = cartData(self.request)
+        contex['cartItems'] = data['cartItems']
+        contex['menu'] = menu
+        return contex
+
 
 
 def about(request):

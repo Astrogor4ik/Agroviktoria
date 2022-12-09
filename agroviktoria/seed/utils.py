@@ -93,22 +93,3 @@ def guestOrder(request, data):
         )
     return customer, order
 
-def AddApplicationUtils(request):
-    if request.method == 'POST':
-        form = AddApplicationCustomer(request.POST)
-        if form.is_valid():
-
-            # print(form.cleaned_data)
-            try:
-                name = form.cleaned_data['name']
-                phone = form.cleaned_data['phone']
-                Customer.objects.create(name=name, phone=phone)
-                messages.success(request, 'Заявка успішно створена, очікуйте на дзвінок від менеджера найближчим часом.')
-                return redirect('index')
-            except:
-                form.add_error(None, 'Ошибка добавления поста')
-
-    else:
-        form = AddApplicationCustomer()
-    print('form', form)
-    return {'form': form}
