@@ -20,7 +20,7 @@ menu = [{'title': "Головна сторінка", 'url_name': 'index'},
         {'title': "Послуга очистки насіння", 'url_name': 'clean_seed'},
         {'title': "Про нас", 'url_name': 'about'},
         {'title': "Місцезнаходження", 'url_name': 'we_on_map'},
-        {'title': "Доставка", 'url_name': 'delivery'},
+        {'title': "Доставка та опата", 'url_name': 'delivery'},
         {'title': "Контакти", 'url_name': 'contact'}
 ]
 
