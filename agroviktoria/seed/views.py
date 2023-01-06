@@ -21,7 +21,7 @@ menu = [{'title': "Головна сторінка", 'url_name': 'index'},
         {'title': "Про нас", 'url_name': 'about'},
         {'title': "Місцезнаходження", 'url_name': 'we_on_map'},
         {'title': "Доставка", 'url_name': 'delivery'},
-        {'title': "Контакти та адреса", 'url_name': 'contact'}
+        {'title': "Контакти", 'url_name': 'contact'}
 ]
 
 
