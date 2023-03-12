@@ -139,6 +139,10 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False)
 
+def multi(a,b):
+    if a and b:
+        return a * b or print(f'These {a} and {b} aren`t numbers!')
+
 
 def show_post(request, prod_slug):
     pub = get_object_or_404(Product, slug=prod_slug)
@@ -150,7 +154,7 @@ def show_post(request, prod_slug):
         try:
             acre_val = int(request.POST.get('acre_val', False))
             rate_val = int(request.POST.get('rate_val', False))
-            res = acre_val * rate_val
+            res = multi(acre_val, rate_val)
         except:
             return redirect('store')
     else:

@@ -1,9 +1,8 @@
 from django.test import TestCase
-#from unittest import TestCase
+from ..views import multi
 
 
 class ProductTest(TestCase):
-
     def test_cart(self):
         response = self.client.get('/cart/')
         self.assertEqual(response.status_code, 200)
@@ -34,8 +33,6 @@ class ProductTest(TestCase):
         response = self.client.get('/about/')
         self.assertEqual(response.status_code, 200)
 
+    def test_plus(self):
+        self.assertEqual(multi(2, 3), 6)
 
-
-
-# if __name__ == '__main__':
-#     main()
